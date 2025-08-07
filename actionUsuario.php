@@ -8,7 +8,7 @@
             //Verifica o método de requisição do servidor
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 //Bloco para declaração de variáveis
-                $fotoUsuario = $nomeUsuario = $dataNascimentoUsuario = $cidadeUsuario = $telefoneUsuario = $emailUsuario = $senhaUsuario = $confirmarSenhaUsuario = "";
+                $fotoUsuario = $nomeUsuario = $emailUsuario = $senhaUsuario = $confirmarSenhaUsuario = "";
 
                 //Variável booleana para controle de erros de preenchimento
                 $erroPreenchimento = false;
@@ -30,59 +30,6 @@
                     }
 
                 }
-
-                //Validação do campo dataNascimentoUsuario
-                //Utiliza a função empty() para verificar se o campo está vazio
-                if(empty($_POST["dataNascimentoUsuario"])){
-                    echo "<div class='alert alert-warning text-center'>O campo <strong>DATA DE NASCIMENTO</strong> é obrigatório!</div>";
-                    $erroPreenchimento = true;
-                }
-                else{
-                    //Armazena valor do formulário na variável
-                    $dataNascimentoUsuario = filtrar_entrada($_POST["dataNascimentoUsuario"]);
-
-                    //Aplicar a função strlen() para verificar o comprimento da string da dataNascimentoUsuario
-                    if(strlen($dataNascimentoUsuario) == 10){
-
-                        //Aplicar a função substr() para gerar substrings para armazenar dia, mês e ano de nascimento do usuário
-                        $diaNascimentoUsuario = substr($dataNascimentoUsuario, 8, 2);
-                        $mesNascimentoUsuario = substr($dataNascimentoUsuario, 5, 2);
-                        $anoNascimentoUsuario = substr($dataNascimentoUsuario, 0, 4);
-
-                        //Aplicar a função checkdate() para verificar se trata-se de uma data válida
-                        if(!checkdate($mesNascimentoUsuario, $diaNascimentoUsuario, $anoNascimentoUsuario)){
-                            echo "<div class='alert alert-warning text-center'><strong>DATA INVÁLIDA</strong></div>";
-                            $erroPreenchimento = true;
-                        }
-                    }
-                    else{
-                        echo "<div class='alert alert-warning text-center'><strong>DATA INVÁLIDA</strong></div>";
-                        $erroPreenchimento = true;
-                    }
-                }
-
-                //Validação do campo cidadeUsuario
-                //Utiliza a função empty() para verificar se o campo está vazio
-                if(empty($_POST["cidadeUsuario"])){
-                    echo "<div class='alert alert-warning text-center'>O campo <strong>CIDADE</strong> é obrigatório!</div>";
-                    $erroPreenchimento = true;
-                }
-                else{
-                    //Armazena valor do formulário na variável
-                    $cidadeUsuario = filtrar_entrada($_POST["cidadeUsuario"]);
-                }
-
-                //Validação do campo telefoneUsuario
-                //Utiliza a função empty() para verificar se o campo está vazio
-                if(empty($_POST["telefoneUsuario"])){
-                    echo "<div class='alert alert-warning text-center'>O campo <strong>TELEFONE</strong> é obrigatório!</div>";
-                    $erroPreenchimento = true;
-                }
-                else{
-                    //Armazena valor do formulário na variável
-                    $telefoneUsuario = filtrar_entrada($_POST["telefoneUsuario"]);
-                }
-
                 //Validação do campo emailUsuario
                 //Utiliza a função empty() para verificar se o campo está vazio
                 if(empty($_POST["emailUsuario"])){
@@ -158,7 +105,7 @@
                 if(!$erroPreenchimento && !$erroUpload){
 
                     //Cria uma variável para armazenar a QUERY para realizar a inserção dos dados do Usuário na tabela Usuarios
-                    $inserirUsuario = "INSERT INTO Usuarios (fotoUsuario, nomeUsuario, dataNascimentoUsuario, cidadeUsuario, telefoneUsuario, emailUsuario, senhaUsuario) VALUES ('$fotoUsuario', '$nomeUsuario', '$dataNascimentoUsuario', '$cidadeUsuario', '$telefoneUsuario', '$emailUsuario', '$senhaUsuario')";
+                    $inserirUsuario = "INSERT INTO Usuarios (fotoUsuario, nomeUsuario, emailUsuario, senhaUsuario) VALUES ('$fotoUsuario', '$nomeUsuario', '$dataNascimentoUsuario', '$cidadeUsuario', '$telefoneUsuario', '$emailUsuario', '$senhaUsuario')";
 
                     //Inclui o arquivo de conexão com o Banco de Dados
                     include("conexaoBD.php");
@@ -176,18 +123,6 @@
                                     <tr>
                                         <th>NOME</th>
                                         <td>$nomeUsuario</td>
-                                    </tr>
-                                    <tr>
-                                        <th>DATA DE NASCIMENTO</th>
-                                        <td>$diaNascimentoUsuario/$mesNascimentoUsuario/$anoNascimentoUsuario</td>
-                                    </tr>
-                                    <tr>
-                                        <th>CIDADE</th>
-                                        <td>$cidadeUsuario</td>
-                                    </tr>
-                                    <tr>
-                                        <th>TELEFONE</th>
-                                        <td>$telefoneUsuario</td>
                                     </tr>
                                     <tr>
                                         <th>EMAIL</th>

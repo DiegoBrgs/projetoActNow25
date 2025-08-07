@@ -8,10 +8,24 @@
             //Verifica o método de requisição do servidor
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 //Bloco para declaração de variáveis
-                $fotoUsuario = $nomeUsuario = $emailUsuario = $senhaUsuario = $confirmarSenhaUsuario = "";
+                $fotoUsuario = $nomeUsuario = $emailUsuario = $senhaUsuario = $confirmarSenhaUsuario = $cpfUsuario = $descUsuario ="";
 
-                //Variável booleana para controle de erros de preenchimento
+                //Variável booleana para controle de erros de preenchimento 
                 $erroPreenchimento = false;
+
+                  //Validação do campo nomeUsuario
+                //Utiliza a função empty() para verificar se o campo está vazio
+                if(empty($_POST["cpfUsuario"])){
+                    echo "<div class='alert alert-warning text-center'>O campo <strong>CPF</strong> é obrigatório!</div>";
+                    $erroPreenchimento = true;
+                }
+                else{
+                    //Armazena valor do formulário na variável
+                    $cpfUsuario = filtrar_entrada($_POST["cpfUsuario"]);
+                    
+                  
+
+                }
 
                 //Validação do campo nomeUsuario
                 //Utiliza a função empty() para verificar se o campo está vazio
@@ -105,7 +119,7 @@
                 if(!$erroPreenchimento && !$erroUpload){
 
                     //Cria uma variável para armazenar a QUERY para realizar a inserção dos dados do Usuário na tabela Usuarios
-                    $inserirUsuario = "INSERT INTO Usuarios (fotoUsuario, nomeUsuario, emailUsuario, senhaUsuario) VALUES ('$fotoUsuario', '$nomeUsuario', '$emailUsuario', '$senhaUsuario')";
+                    $inserirUsuario = "INSERT INTO Usuarios (fotoUsuario, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, descUsuario) VALUES ('$fotoUsuario', '$nomeUsuario', '$emailUsuario', '$senhaUsuario', '$cpfUsuario', '$descUsuario')";
 
                     //Inclui o arquivo de conexão com o Banco de Dados
                     include("conexaoBD.php");

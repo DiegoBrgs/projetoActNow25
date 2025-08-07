@@ -37,7 +37,7 @@
             $mensagemFiltro = "no total";
         }
 
-        $res            = mysqli_query($conn, $listarProdutos); //Recebe true OR false com base na execução
+        $res            = mysqli_query($conn, $listarUsuarios); //Recebe true OR false com base na execução
         $totalProdutos  = mysqli_num_rows($res); //Retorna a quantidade de registros encontrados
 
         if($totalProdutos > 0){

@@ -34,6 +34,14 @@
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback"></div>
                     </div>
+
+                    <div class="form-floating mb-3 mt-3">
+                        <input type="text" class="form-control" id="descUsuario" placeholder="descricao" name="descUsuario" required>
+                        <label for="descUsuario">Fale mais sobre você</label>
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+
                     <div class="form-floating mt-3 mb-3">
                         <input type="password" class="form-control" id="senhaUsuario" placeholder="Senha" name="senhaUsuario" required>
                         <label for="senhaUsuario">Senha</label>

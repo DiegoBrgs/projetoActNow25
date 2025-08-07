@@ -20,8 +20,14 @@
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback"></div>
                     </div>
-        
+
+                    <div class="form-floating mb-3 mt-3">
+                        <input type="text" class="form-control" id="cpfUsuario" placeholder="cpfUsuario" name="cpfUsuario" required>
+                        <label for="cpfUsuario">CPF</label>
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback"></div>
                     </div>
+        
                     <div class="form-floating mb-3 mt-3">
                         <input type="email" class="form-control" id="emailUsuario" placeholder="Email" name="emailUsuario" required>
                         <label for="emailUsuario">Email</label>

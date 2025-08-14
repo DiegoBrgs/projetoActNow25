@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Ago-2025 às 19:58
+-- Tempo de geração: 14-Ago-2025 às 22:47
 -- Versão do servidor: 8.0.29
 -- versão do PHP: 8.1.6
 
@@ -45,8 +45,16 @@ CREATE TABLE `empresa` (
   `cnpj` varchar(18) NOT NULL,
   `nome_empresa` varchar(100) NOT NULL,
   `area_atuacao` varchar(100) NOT NULL,
-  `localizacao` varchar(100) NOT NULL
+  `localizacao` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `senhaEmpresa` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `empresa`
+--
+
+INSERT INTO `empresa` (`cnpj`, `nome_empresa`, `area_atuacao`, `localizacao`, `senhaEmpresa`) VALUES
+('11.111.111/1111-11', 'klabin', 'aa', 'aaa', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
@@ -61,7 +69,7 @@ CREATE TABLE `projeto` (
   `carga_horaria` varchar(100) NOT NULL,
   `descricao` varchar(200) NOT NULL,
   `status_projeto` varchar(20) NOT NULL,
-  `cnpj` varchar(100) DEFAULT NULL,
+  `cnpj` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `fotoProjeto` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -70,7 +78,8 @@ CREATE TABLE `projeto` (
 --
 
 INSERT INTO `projeto` (`id_projeto`, `nomeProjeto`, `vagas`, `carga_horaria`, `descricao`, `status_projeto`, `cnpj`, `fotoProjeto`) VALUES
-(1, 'coringa', 0, '24 por dia', 'seja o coringa', 'disponivel', NULL, 'img/images (2).jpg');
+(13, 'batman', 1, '30 por dia', 'batman', '', '11.111.111/1111-11', 'img/images (3).jpg'),
+(14, 'coringa', 2, '30 por dia', 'seja o coringa', 'disponivel', '11.111.111/1111-11', 'img/images (2).jpg');
 
 -- --------------------------------------------------------
 
@@ -139,7 +148,7 @@ ALTER TABLE `avaliacao`
 -- AUTO_INCREMENT de tabela `projeto`
 --
 ALTER TABLE `projeto`
-  MODIFY `id_projeto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_projeto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restrições para despejos de tabelas

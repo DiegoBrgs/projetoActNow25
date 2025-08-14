@@ -7,8 +7,8 @@
         //Inclui o arquivo de conexão com o Banco de Dados
         include "conexaoBD.php";
 
-        //Variável PHP que recebe a Query para selecionar todos os campos da tabela Produtos
-        $listarProdutos = "SELECT * FROM Produtos";
+        //Variável PHP que recebe a Query para selecionar todos os campos da tabela Projetos
+        $listarProjetos = "SELECT * FROM Projetos";
 
         //Verificar se há algum parâmetro chamado filtroProduto sendo recebido por GET
         if(isset($_GET['filtroProduto'])){
@@ -17,7 +17,7 @@
 
             //Se o filtro for diferente de 'todos', concatena a filtragem
             if($filtroProduto != 'todos'){
-                $listarProdutos = $listarProdutos . " WHERE statusProduto LIKE '$filtroProduto' ";
+                $listarProjetos = $listarProjetos . " WHERE statusProduto LIKE '$filtroProduto' ";
             }
 
             switch($filtroProduto){
@@ -37,35 +37,35 @@
             $mensagemFiltro = "no total";
         }
 
-        $res            = mysqli_query($conn, $listarUsuarios); //Recebe true OR false com base na execução
-        $totalProdutos  = mysqli_num_rows($res); //Retorna a quantidade de registros encontrados
+        $res            = mysqli_query($conn, $listarProjetos); //Recebe true OR false com base na execução
+        $totalProjetos  = mysqli_num_rows($res); //Retorna a quantidade de registros encontrados
 
-        if($totalProdutos > 0){
-            if($totalProdutos == 1){
-                //Se o total de produtos for igual a um, exibe mensagem no singular
-                echo "<div class='alert alert-info text-center'>Há <strong>$totalProdutos</strong> produto $mensagemFiltro cadastrado!</div>";
+        if($totalProjetos > 0){
+            if($totalProjetos == 1){
+                //Se o total de Projetos for igual a um, exibe mensagem no singular
+                echo "<div class='alert alert-info text-center'>Há <strong>$totalProjetos</strong> produto $mensagemFiltro cadastrado!</div>";
             }
             else{
-                //Se o total de produtos não for igual a um, exibe mensagem no plural
-                echo "<div class='alert alert-info text-center'>Há <strong>$totalProdutos</strong> produtos $mensagemFiltro cadastrados!</div>";
+                //Se o total de Projetos não for igual a um, exibe mensagem no plural
+                echo "<div class='alert alert-info text-center'>Há <strong>$totalProjetos</strong> Projetos $mensagemFiltro cadastrados!</div>";
             }
         }
         else{
-            echo "<div class='alert alert-info text-center'>Não há Produtos cadastrados no sistema!</div>";
+            echo "<div class='alert alert-info text-center'>Não há Projetos cadastrados no sistema!</div>";
         }
 
         echo "
             <form name='formFiltro' action='index.php' method='GET'>
                 <div class='form-floating mt-3'>
                     <select class='form-select' name='filtroProduto' required>
-                        <option value='todos'"; if($filtroProduto == 'todos'){echo "selected";} echo">Exibir todos os Produtos</option>
-                        <option value='disponivel'"; if($filtroProduto == 'disponivel'){echo "selected";} echo">Exibir apenas Produtos disponíveis</option>
-                        <option value='esgotado'"; if($filtroProduto == 'esgotado'){echo "selected";} echo">Exibir apenas Produtos esgotados</option>
+                        <option value='todos'"; if($filtroProduto == 'todos'){echo "selected";} echo">Exibir todos os Projetos</option>
+                        <option value='disponivel'"; if($filtroProduto == 'disponivel'){echo "selected";} echo">Exibir apenas Projetos disponíveis</option>
+                        <option value='esgotado'"; if($filtroProduto == 'esgotado'){echo "selected";} echo">Exibir apenas Projetos esgotados</option>
                     </select>
                     <label for='filtroProduto'>Selecione um Filtro</label>
                     <br>
                 </div>
-                <button type='submit' class='btn btn-outline-success' style='float:right'><i class='bi bi-funnel'></i> Filtrar Produtos</button>
+                <button type='submit' class='btn btn-outline-success' style='float:right'><i class='bi bi-funnel'></i> Filtrar Projetos</button>
                 <br>
             </form>
         ";

@@ -94,10 +94,10 @@
                 }
 
                 //Se não houver erro de preenchimento, exibe alerta de sucesso e uma tabela com os dados informados
-                if(!$erroPreenchimento && !$erroUpload){
+                if(!$erroPreenchimento){
 
                     //Cria uma variável para armazenar a QUERY para realizar a inserção dos dados do Usuário na tabela Usuarios
-                    $inserirEmpresa = "INSERT INTO Usuarios (nome_empresa, localizacao, senhaEmpresa, cnpj, area_atuacao) VALUES ('$nome_empresa', '$localizacao', '$senhaEmpresa', '$cnpj', '$area_atuacao')";
+                    $inserirEmpresa = "INSERT INTO Empresa (nome_empresa, localizacao, senhaEmpresa, cnpj, area_atuacao) VALUES ('$nome_empresa', '$localizacao', '$senhaEmpresa', '$cnpj', '$area_atuacao')";
 
                     //Inclui o arquivo de conexão com o Banco de Dados
                     include("conexaoBD.php");
@@ -105,7 +105,7 @@
                     //Se conseguir executar a query para inserção, exibe alerta de sucesso e a tabela com os dados informados
                     if(mysqli_query($conn, $inserirEmpresa)){
 
-                        echo "<div class='alert alert-success text-center'><strong>Usuário</strong> cadastrado(a) com sucesso!</div>";
+                        echo "<div class='alert alert-success text-center'><strong>Empresa</strong> cadastrado(a) com sucesso!</div>";
                         echo "
                             <div class='container mt-3'>
                                 <table class='table'>

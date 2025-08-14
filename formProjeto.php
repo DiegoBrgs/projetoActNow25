@@ -19,18 +19,35 @@
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback"></div>
                     </div>
+
                     <div class="form-floating mb-3 mt-3">
-                        <textarea class="form-control" id="descricaoProjeto" placeholder="Informe uma breve descrição sobre o Produto" name="descricaoProduto" required></textarea>
-                        <label for="descricaoProduto">Descrição do Projeto</label>
+                        <input type="text" class="form-control" id="vagas" placeholder="Vagas" name="vagas" required>
+                        <label for="vagas">Vagas disponíveis</label>
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback"></div>
                     </div>
-                    <div class="form-floating mt-3 mb-3">
-                        <input type="text" class="form-control" id="valorProduto" placeholder="Valor do Produto" name="valorProjeto" required>
-                        <label for="valorProduto">Valor do Projeto (R$):</label>
+
+                    <div class="form-floating mb-3 mt-3">
+                        <input type="text" class="form-control" id="carga_horaria" placeholder="carga_horaria" name="carga_horaria" required>
+                        <label for="carga_horaria">Carga horária</label>
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback"></div>
                     </div>
+
+                    <div class="form-floating mb-3 mt-3">
+                        <input type="text" class="form-control" id="status_projeto" placeholder="status_projeto" name="status_projeto" required>
+                        <label for="status_projeto">Status do Projeto</label>
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    
+                    <div class="form-floating mb-3 mt-3">
+                        <textarea class="form-control" id="descricao" placeholder="Informe uma breve descrição sobre o Produto" name="descricao" required></textarea>
+                        <label for="descricao">Descrição do Projeto</label>
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                
                     <button type="submit" class="btn btn-success">Cadastrar Projeto</button>
                 </form>
             </div>

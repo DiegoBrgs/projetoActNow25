@@ -8,7 +8,7 @@
         include "conexaoBD.php";
 
         //Variável PHP que recebe a Query para selecionar todos os campos da tabela Projetos
-        $listarProjetos = "SELECT * FROM Projetos";
+        $listarProjetos = "SELECT * FROM Projeto";
 
         //Verificar se há algum parâmetro chamado filtroProduto sendo recebido por GET
         if(isset($_GET['filtroProduto'])){

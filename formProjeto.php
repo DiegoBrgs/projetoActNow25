@@ -41,12 +41,6 @@
                         <div class="invalid-feedback"></div>
                     </div>
 
-                    <div class="form-floating mb-3 mt-3">
-                        <input type="text" class="form-control" id="status_projeto" placeholder="status_projeto" name="status_projeto" required>
-                        <label for="status_projeto">Status do Projeto</label>
-                        <div class="valid-feedback"></div>
-                        <div class="invalid-feedback"></div>
-                    </div>
                     
                     <div class="form-floating mb-3 mt-3">
                         <textarea class="form-control" id="descricao" placeholder="Informe uma breve descrição sobre o Produto" name="descricao" required></textarea>

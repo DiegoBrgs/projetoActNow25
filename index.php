@@ -7,20 +7,20 @@
         //Inclui o arquivo de conexão com o Banco de Dados
         include "conexaoBD.php";
 
-        //Variável PHP que recebe a Query para selecionar todos os campos da tabela Projetos
-        $listarProjetos = "SELECT * FROM Projeto";
+        //Variável PHP que recebe a Query para selecionar todos os campos da tabela Produtos
+        $listarProdutos = "SELECT * FROM Produtos";
 
-        //Verificar se há algum parâmetro chamado filtroProjeto sendo recebido por GET
-        if(isset($_GET['filtroProjeto'])){
-            //Se houver valor setado no GET chamado 'filtroProjeto', armazena na variável $
-            $filtroProjeto = $_GET['filtroProjeto'];
+        //Verificar se há algum parâmetro chamado filtroProduto sendo recebido por GET
+        if(isset($_GET['filtroProduto'])){
+            //Se houver valor setado no GET chamado 'filtroProduto', armazena na variável $
+            $filtroProduto = $_GET['filtroProduto'];
 
             //Se o filtro for diferente de 'todos', concatena a filtragem
-            if($filtroProjeto != 'todos'){
-                $listarProjetos = $listarProjetos . " WHERE statusProjeto LIKE '$filtroProjeto' ";
+            if($filtroProduto != 'todos'){
+                $listarProdutos = $listarProdutos . " WHERE statusProduto LIKE '$filtroProduto' ";
             }
 
-            switch($filtroProjeto){
+            switch($filtroProduto){
                 case "todos" : $mensagemFiltro = "no total";
                 break;
 
@@ -33,39 +33,39 @@
 
         }
         else{
-            $filtroProjeto = "todos";
+            $filtroProduto = "todos";
             $mensagemFiltro = "no total";
         }
 
-        $res            = mysqli_query($conn, $listarProjetos); //Recebe true OR false com base na execução
-        $totalProjetos  = mysqli_num_rows($res); //Retorna a quantidade de registros encontrados
+        $res            = mysqli_query($conn, $listarUsuarios); //Recebe true OR false com base na execução
+        $totalProdutos  = mysqli_num_rows($res); //Retorna a quantidade de registros encontrados
 
-        if($totalProjetos > 0){
-            if($totalProjetos == 1){
-                //Se o total de Projetos for igual a um, exibe mensagem no singular
-                echo "<div class='alert alert-info text-center'>Há <strong>$totalProjetos</strong> Projeto $mensagemFiltro cadastrado!</div>";
+        if($totalProdutos > 0){
+            if($totalProdutos == 1){
+                //Se o total de produtos for igual a um, exibe mensagem no singular
+                echo "<div class='alert alert-info text-center'>Há <strong>$totalProdutos</strong> produto $mensagemFiltro cadastrado!</div>";
             }
             else{
-                //Se o total de Projetos não for igual a um, exibe mensagem no plural
-                echo "<div class='alert alert-info text-center'>Há <strong>$totalProjetos</strong> Projetos $mensagemFiltro cadastrados!</div>";
+                //Se o total de produtos não for igual a um, exibe mensagem no plural
+                echo "<div class='alert alert-info text-center'>Há <strong>$totalProdutos</strong> produtos $mensagemFiltro cadastrados!</div>";
             }
         }
         else{
-            echo "<div class='alert alert-info text-center'>Não há Projetos cadastrados no sistema!</div>";
+            echo "<div class='alert alert-info text-center'>Não há Produtos cadastrados no sistema!</div>";
         }
 
         echo "
             <form name='formFiltro' action='index.php' method='GET'>
                 <div class='form-floating mt-3'>
-                    <select class='form-select' name='filtroProjeto' required>
-                        <option value='todos'"; if($filtroProjeto == 'todos'){echo "selected";} echo">Exibir todos os Projetos</option>
-                        <option value='disponivel'"; if($filtroProjeto == 'disponivel'){echo "selected";} echo">Exibir apenas Projetos disponíveis</option>
-                        <option value='esgotado'"; if($filtroProjeto == 'esgotado'){echo "selected";} echo">Exibir apenas Projetos esgotados</option>
+                    <select class='form-select' name='filtroProduto' required>
+                        <option value='todos'"; if($filtroProduto == 'todos'){echo "selected";} echo">Exibir todos os Produtos</option>
+                        <option value='disponivel'"; if($filtroProduto == 'disponivel'){echo "selected";} echo">Exibir apenas Produtos disponíveis</option>
+                        <option value='esgotado'"; if($filtroProduto == 'esgotado'){echo "selected";} echo">Exibir apenas Produtos esgotados</option>
                     </select>
-                    <label for='filtroProjeto'>Selecione um Filtro</label>
+                    <label for='filtroProduto'>Selecione um Filtro</label>
                     <br>
                 </div>
-                <button type='submit' class='btn btn-outline-success' style='float:right'><i class='bi bi-funnel'></i> Filtrar Projetos</button>
+                <button type='submit' class='btn btn-outline-success' style='float:right'><i class='bi bi-funnel'></i> Filtrar Produtos</button>
                 <br>
             </form>
         ";
@@ -80,12 +80,12 @@
         <?php
             //Loop para armazenar os registros da tabela em variáveis PHP
             while($registro = mysqli_fetch_assoc($res)){
-                $idProjeto        = $registro['idProjeto'];
-                $fotoProjeto      = $registro['fotoProjeto'];
-                $nomeProjeto      = $registro['nomeProjeto'];
-                $descricaoProjeto = $registro['descricaoProjeto'];
-                $valorProjeto     = $registro['valorProjeto'];
-                $statusProjeto    = $registro['statusProjeto'];
+                $idProduto        = $registro['idProduto'];
+                $fotoProduto      = $registro['fotoProduto'];
+                $nomeProduto      = $registro['nomeProduto'];
+                $descricaoProduto = $registro['descricaoProduto'];
+                $valorProduto     = $registro['valorProduto'];
+                $statusProduto    = $registro['statusProduto'];
 
                 echo "
                     <div class='col-sm-3'>
@@ -93,9 +93,9 @@
                         <div class='card' style='width:100%; height:100%'>
 
                             <div class='card-body' style='height:100%'>
-                                <a href='visualizarProjeto.php?idProjeto=$idProjeto' style='text-decoration:none' title='Visualizar mais detalhes de $nomeProjeto'>
+                                <a href='visualizarProduto.php?idProduto=$idProduto' style='text-decoration:none' title='Visualizar mais detalhes de $nomeProduto'>
                                     <div class='position-relative'> ";
-                                        if($statusProjeto == 'esgotado'){
+                                        if($statusProduto == 'esgotado'){
                                             echo "
                                                 <div class='position-absolute top-50 start-50 translate-middle bg-danger text-white px-4 py-2 fs-6 fw-bold rounded shadow' style='z-index: 10; opacity: 0.85;'>
                                                     ESGOTADO
@@ -103,8 +103,8 @@
                                             ";
                                         }
                                         echo "
-                                            <img class='card-img-top' src='$fotoProjeto' alt='Foto de $nomeProjeto' ";
-                                                if($statusProjeto == 'esgotado'){
+                                            <img class='card-img-top' src='$fotoProduto' alt='Foto de $nomeProduto' ";
+                                                if($statusProduto == 'esgotado'){
                                                     echo "style='filter:grayscale(100%)' ";
                                                 }
                                             echo ">
@@ -113,11 +113,11 @@
                             </div>
 
                             <div class='card-body text-center'>
-                                <h4 class='card-title'>$nomeProjeto</h4>
-                                <p class='card-text'>Valor: <strong>R$ $valorProjeto</strong>
+                                <h4 class='card-title'>$nomeProduto</h4>
+                                <p class='card-text'>Valor: <strong>R$ $valorProduto</strong>
                                 <div class='d-grid' style='border-size:border-box'>
-                                    <a class='btn btn-outline-success' href='visualizarProjeto.php?idProjeto=$idProjeto' style='text-decoration:none' title='Visualizar mais detalhes de $nomeProjeto'>
-                                        <i class='bi bi-eye'></i> Visualizar Projeto
+                                    <a class='btn btn-outline-success' href='visualizarProduto.php?idProduto=$idProduto' style='text-decoration:none' title='Visualizar mais detalhes de $nomeProduto'>
+                                        <i class='bi bi-eye'></i> Visualizar Produto
                                     </a>
                                 </div>
                             </div>

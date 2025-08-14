@@ -28,15 +28,19 @@
 
     <br>
 
-     <p>
-        Login de empresas: <a href="formLoginEmpresas.php">Clique aqui!</a>
-    </p>
-
     <p>
         Ainda não possui cadastro? <a href="formUsuario.php" title="Cadastrar-se">Clique aqui!</a>&nbsp<i class="bi bi-emoji-smile"></i>
     </p>
     
-    <p>
+
+    <br>
+
+    <p><h3>Para Empresas:</h3></p>
+
+    <a class="btn btn-success" href="formLoginEmpresas.php" >Empresas</a>
+
+
+    <p> <br>
         Deseja cadastrar uma empresa? <a href="formEmpresa.php" title="Cadastrar empresa">Clique aqui!</a>&nbsp<i class="bi bi-emoji-smile"></i>
     </p>
 

@@ -8,7 +8,7 @@
             //Verifica o método de requisição do servidor
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 //Bloco para declaração de variáveis
-                $fotoProjeto = $nomeProjeto = $descricao = $carga_horaria = $vagas = $cnpj = "";
+                $fotoProjeto = $nomeProjeto = $descricao = $carga_horaria = $vagas = "";
 
                 //Variável booleana para controle de erros de preenchimento
                 $erroPreenchimento = false;

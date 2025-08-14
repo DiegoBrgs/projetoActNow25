@@ -80,12 +80,14 @@
         <?php
             //Loop para armazenar os registros da tabela em variáveis PHP
             while($registro = mysqli_fetch_assoc($res)){
-                $idProduto        = $registro['idProduto'];
-                $fotoProduto      = $registro['fotoProduto'];
-                $nomeProduto      = $registro['nomeProduto'];
-                $descricaoProduto = $registro['descricaoProduto'];
-                $valorProduto     = $registro['valorProduto'];
-                $statusProduto    = $registro['statusProduto'];
+                $idProjeto           = $registro['id_projeto'];
+                $nomeProjeto         = $registro['nomeProjeto'];
+                $vagas               = $registro['vagas'];
+                $cargaHoraria        = $registro['carga_horaria'];
+                $descricao           = $registro['descricao'];
+                $statusProjeto       = $registro['status_projeto'];
+                $cnpj                = $registro['cnpj'];
+                $fotoProduto         = $registro['fotoProduto'];
 
                 echo "
                     <div class='col-sm-3'>

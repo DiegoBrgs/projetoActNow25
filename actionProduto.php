@@ -8,7 +8,7 @@
             //Verifica o método de requisição do servidor
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 //Bloco para declaração de variáveis
-                $fotoProjeto = $nomeProjeto = $descricaoProjeto = $valorProjeto = "";
+                $fotoProjeto = $nomeProjeto = $descricao = $carga_horaria = $vagas = "";
 
                 //Variável booleana para controle de erros de preenchimento
                 $erroPreenchimento = false;
@@ -24,26 +24,35 @@
                     $nomeProjeto = filtrar_entrada($_POST["nomeProjeto"]);
                 }
 
-                //Validação do campo descricaoProjeto
+                //Validação do campo descricao
                 //Utiliza a função empty() para verificar se o campo está vazio
-                if(empty($_POST["descricaoProjeto"])){
+                if(empty($_POST["descricao"])){
                     echo "<div class='alert alert-warning text-center'>O campo <strong>DESCRIÇÃO</strong> é obrigatório!</div>";
                     $erroPreenchimento = true;
                 }
                 else{
                     //Armazena valor do formulário na variável
-                    $descricaoProjeto = filtrar_entrada($_POST["descricaoProjeto"]);
+                    $descricao = filtrar_entrada($_POST["descricao"]);
                 }
 
-                //Validação do campo valorProjeto
+                //Validação do campo carga_horaria
                 //Utiliza a função empty() para verificar se o campo está vazio
-                if(empty($_POST["valorProjeto"])){
+                if(empty($_POST["carga_horaria"])){
                     echo "<div class='alert alert-warning text-center'>O campo <strong>VALOR</strong> é obrigatório!</div>";
                     $erroPreenchimento = true;
                 }
                 else{
                     //Armazena valor do formulário na variável
-                    $valorProjeto = filtrar_entrada($_POST["valorProjeto"]);
+                    $carga_horaria = filtrar_entrada($_POST["carga_horaria"]);
+                }
+
+                //Validação do campo vagas
+                //Utiliza a função empty() para verificar se o campo está vazio
+                if(empty($_POST["vagas"]) && $_POST["vagas"] !== "0"){ 
+                    echo "<div class='alert alert-warning text-center'>O campo <strong>VAGAS</strong> é obrigatório!</div>";
+                    $erroPreenchimento = true;
+                } else {
+                    $vagas = intval($_POST["vagas"]);
                 }
 
                 //Início da validação da foto do produto
@@ -82,14 +91,14 @@
                 //Se não houver erro de preenchimento, exibe alerta de sucesso e uma tabela com os dados informados
                 if(!$erroPreenchimento && !$erroUpload){
 
-                    //Cria uma variável para armazenar a QUERY para realizar a inserção dos dados do produto na tabela Produtos
-                    $inserirProduto = "INSERT INTO Produtos (fotoProjeto, nomeProjeto, descricaoProjeto, valorProjeto, status_projeto) VALUES ('$fotoProjeto', '$nomeProjeto', '$descricaoProjeto', '$valorProjeto', 'disponivel')";
+                    //Cria uma variável para armazenar a QUERY para realizar a inserção dos dados do produto na tabela Projetos
+                    $inserirProjeto = "INSERT INTO Projeto (fotoProjeto, nomeProjeto, descricao, carga_horaria, status_projeto, vagas) VALUES ('$fotoProjeto', '$nomeProjeto', '$descricao', '$carga_horaria', 'disponivel', '$vagas')";
 
                     //Inclui o arquivo de conexão com o Banco de Dados
                     include("conexaoBD.php");
 
                     //Se conseguir executar a query para inserção, exibe alerta de sucesso e a tabela com os dados informados
-                    if(mysqli_query($conn, $inserirProduto)){
+                    if(mysqli_query($conn, $inserirProjeto)){
 
                         echo "<div class='alert alert-success text-center'><strong>Produto</strong> cadastrado(a) com sucesso!</div>";
                         echo "
@@ -104,11 +113,11 @@
                                     </tr>
                                     <tr>
                                         <th>DESCRIÇÃO DO PRODUTO</th>
-                                        <td>$descricaoProjeto</td>
+                                        <td>$descricao</td>
                                     </tr>
                                     <tr>
-                                        <th>VALOR DO PRODUTO</th>
-                                        <td>$valorProjeto</td>
+                                        <th>CARGA HORARIA</th>
+                                        <td>$carga_horaria</td>
                                     </tr>
                                 </table>
                             </div>
@@ -121,8 +130,8 @@
                 }
             }
             else{
-                //Redireciona o usuário para o formProduto.php
-                header("location:formProduto.php");
+                //Redireciona o usuário para o formProjeto.php
+                header("location:formProjeto.php");
             }
 
             //Função para filtrar entrada de dados

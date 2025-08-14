@@ -52,7 +52,7 @@
                             <a class="nav-link active" href="index.php">Página Inicial</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="formProduto.php">Cadastrar Produto</a>
+                            <a class="nav-link" href="formProjeto.php">Cadastrar Projeto</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="formLogin.php">Login</a>

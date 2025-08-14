@@ -1,0 +1,157 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 14-Ago-2025 às 18:51
+-- Versão do servidor: 8.0.29
+-- versão do PHP: 8.1.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `actnowifpr`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `avaliacao`
+--
+
+CREATE TABLE `avaliacao` (
+  `id_avaliacao` int NOT NULL,
+  `nota` int NOT NULL,
+  `comentario` varchar(100) NOT NULL,
+  `cpf` varchar(100) DEFAULT NULL,
+  `cnpj` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `empresa`
+--
+
+CREATE TABLE `empresa` (
+  `cnpj` varchar(18) NOT NULL,
+  `nome_empresa` varchar(100) NOT NULL,
+  `area_atuacao` varchar(100) NOT NULL,
+  `localizacao` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `projeto`
+--
+
+CREATE TABLE `projeto` (
+  `id_projeto` int NOT NULL,
+  `vagas` int NOT NULL,
+  `carga_horaria` int NOT NULL,
+  `requisitos_habilidades` varchar(100) NOT NULL,
+  `tema` varchar(100) NOT NULL,
+  `descricao` varchar(200) NOT NULL,
+  `status_projeto` varchar(20) NOT NULL,
+  `cnpj` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `emailUsuario` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `senhaUsuario` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `cpfUsuario` varchar(14) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nomeUsuario` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `descUsuario` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `fotoUsuario` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`emailUsuario`, `senhaUsuario`, `cpfUsuario`, `nomeUsuario`, `descUsuario`, `fotoUsuario`) VALUES
+('12@2', 'e4a6222cdb5b34375400904f03d8e6a5', '242.42', 'diego', '', 'img/base.png');
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `avaliacao`
+--
+ALTER TABLE `avaliacao`
+  ADD PRIMARY KEY (`id_avaliacao`),
+  ADD KEY `cpf` (`cpf`),
+  ADD KEY `cnpj` (`cnpj`);
+
+--
+-- Índices para tabela `empresa`
+--
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`cnpj`);
+
+--
+-- Índices para tabela `projeto`
+--
+ALTER TABLE `projeto`
+  ADD PRIMARY KEY (`id_projeto`),
+  ADD KEY `cnpj` (`cnpj`);
+
+--
+-- Índices para tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`cpfUsuario`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `avaliacao`
+--
+ALTER TABLE `avaliacao`
+  MODIFY `id_avaliacao` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `projeto`
+--
+ALTER TABLE `projeto`
+  MODIFY `id_projeto` int NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `avaliacao`
+--
+ALTER TABLE `avaliacao`
+  ADD CONSTRAINT `avaliacao_ibfk_1` FOREIGN KEY (`cpf`) REFERENCES `usuarios` (`cpfUsuario`),
+  ADD CONSTRAINT `avaliacao_ibfk_2` FOREIGN KEY (`cnpj`) REFERENCES `empresa` (`cnpj`);
+
+--
+-- Limitadores para a tabela `projeto`
+--
+ALTER TABLE `projeto`
+  ADD CONSTRAINT `projeto_ibfk_1` FOREIGN KEY (`cnpj`) REFERENCES `empresa` (`cnpj`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

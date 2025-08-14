@@ -8,7 +8,7 @@
             //Verifica o método de requisição do servidor
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 //Bloco para declaração de variáveis
-                $fotoProjeto = $nomeProjeto = $descricao = $carga_horaria = $vagas = $cnpj = "";
+                $fotoProjeto = $nomeProjeto = $descricao = $carga_horaria = $vagas = $cnpj = $status_projeto = "";
 
                 //Variável booleana para controle de erros de preenchimento
                 $erroPreenchimento = false;
@@ -102,7 +102,7 @@
                 if(!$erroPreenchimento && !$erroUpload){
 
                     //Cria uma variável para armazenar a QUERY para realizar a inserção dos dados do produto na tabela Projetos
-                    $inserirProjeto = "INSERT INTO Projeto (fotoProjeto, nomeProjeto, descricao, carga_horaria, status_projeto, vagas, cnpj) VALUES ('$fotoProjeto', '$nomeProjeto', '$descricao', '$carga_horaria', 'disponivel', '$vagas', $cnpj)";
+                    $inserirProjeto = "INSERT INTO Projeto (fotoProjeto, nomeProjeto, descricao, carga_horaria, status_projeto, vagas, cnpj) VALUES ('$fotoProjeto', '$nomeProjeto', '$descricao', '$carga_horaria', '$status_projeto', '$vagas', '$cnpj')";
 
                     //Inclui o arquivo de conexão com o Banco de Dados
                     include("conexaoBD.php");

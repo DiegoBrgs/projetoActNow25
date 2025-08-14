@@ -21,6 +21,13 @@
                     </div>
 
                     <div class="form-floating mb-3 mt-3">
+                        <input type="text" class="form-control" id="cnpj" placeholder="Nome" name="cnpj" required>
+                        <label for="cnpj">CNPJ da Empresa</label>
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+
+                    <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="vagas" placeholder="Vagas" name="vagas" required>
                         <label for="vagas">Vagas disponíveis</label>
                         <div class="valid-feedback"></div>

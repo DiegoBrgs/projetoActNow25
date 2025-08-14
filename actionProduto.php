@@ -8,7 +8,7 @@
             //Verifica o método de requisição do servidor
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 //Bloco para declaração de variáveis
-                $fotoProjeto = $nomeProjeto = $descricao = $carga_horaria = $vagas = "";
+                $fotoProjeto = $nomeProjeto = $descricao = $carga_horaria = $vagas = $cnpj = "";
 
                 //Variável booleana para controle de erros de preenchimento
                 $erroPreenchimento = false;
@@ -38,7 +38,17 @@
                 //Validação do campo carga_horaria
                 //Utiliza a função empty() para verificar se o campo está vazio
                 if(empty($_POST["carga_horaria"])){
-                    echo "<div class='alert alert-warning text-center'>O campo <strong>VALOR</strong> é obrigatório!</div>";
+                    echo "<div class='alert alert-warning text-center'>O campo <strong>CARGA HORARIA</strong> é obrigatório!</div>";
+                    $erroPreenchimento = true;
+                }
+                else{
+                    //Armazena valor do formulário na variável
+                    $carga_horaria = filtrar_entrada($_POST["carga_horaria"]);
+                }
+                //Validação do campo cnpj
+                //Utiliza a função empty() para verificar se o campo está vazio
+                if(empty($_POST["cnpj"])){
+                    echo "<div class='alert alert-warning text-center'>O campo <strong>CNPJ</strong> é obrigatório!</div>";
                     $erroPreenchimento = true;
                 }
                 else{
@@ -92,7 +102,7 @@
                 if(!$erroPreenchimento && !$erroUpload){
 
                     //Cria uma variável para armazenar a QUERY para realizar a inserção dos dados do produto na tabela Projetos
-                    $inserirProjeto = "INSERT INTO Projeto (fotoProjeto, nomeProjeto, descricao, carga_horaria, status_projeto, vagas) VALUES ('$fotoProjeto', '$nomeProjeto', '$descricao', '$carga_horaria', 'disponivel', '$vagas')";
+                    $inserirProjeto = "INSERT INTO Projeto (fotoProjeto, nomeProjeto, descricao, carga_horaria, status_projeto, vagas, cnpj) VALUES ('$fotoProjeto', '$nomeProjeto', '$descricao', '$carga_horaria', 'disponivel', '$vagas', '$cnpj')";
 
                     //Inclui o arquivo de conexão com o Banco de Dados
                     include("conexaoBD.php");
@@ -108,16 +118,24 @@
                                 </div>
                                 <table class='table'>
                                     <tr>
-                                        <th>NOME</th>
+                                        <th>NOME DO PROJETO</th>
                                         <td>$nomeProjeto</td>
                                     </tr>
                                     <tr>
-                                        <th>DESCRIÇÃO DO PRODUTO</th>
+                                        <th>DESCRIÇÃO DO PROJETO</th>
                                         <td>$descricao</td>
                                     </tr>
                                     <tr>
                                         <th>CARGA HORARIA</th>
                                         <td>$carga_horaria</td>
+                                    </tr>
+                                    <tr>
+                                        <th>VAGAS</th>
+                                        <td>$vagas</td>
+                                    </tr>
+                                    <tr>
+                                        <th>STATUS DO PROJETO</th>
+                                        <td>$status_projeto</td>
                                     </tr>
                                 </table>
                             </div>

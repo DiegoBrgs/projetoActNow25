@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Ago-2025 às 18:51
+-- Tempo de geração: 14-Ago-2025 às 19:58
 -- Versão do servidor: 8.0.29
 -- versão do PHP: 8.1.6
 
@@ -56,14 +56,21 @@ CREATE TABLE `empresa` (
 
 CREATE TABLE `projeto` (
   `id_projeto` int NOT NULL,
+  `nomeProjeto` varchar(100) NOT NULL,
   `vagas` int NOT NULL,
-  `carga_horaria` int NOT NULL,
-  `requisitos_habilidades` varchar(100) NOT NULL,
-  `tema` varchar(100) NOT NULL,
+  `carga_horaria` varchar(100) NOT NULL,
   `descricao` varchar(200) NOT NULL,
   `status_projeto` varchar(20) NOT NULL,
-  `cnpj` varchar(100) DEFAULT NULL
+  `cnpj` varchar(100) DEFAULT NULL,
+  `fotoProjeto` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `projeto`
+--
+
+INSERT INTO `projeto` (`id_projeto`, `nomeProjeto`, `vagas`, `carga_horaria`, `descricao`, `status_projeto`, `cnpj`, `fotoProjeto`) VALUES
+(1, 'coringa', 0, '24 por dia', 'seja o coringa', 'disponivel', NULL, 'img/images (2).jpg');
 
 -- --------------------------------------------------------
 
@@ -132,7 +139,7 @@ ALTER TABLE `avaliacao`
 -- AUTO_INCREMENT de tabela `projeto`
 --
 ALTER TABLE `projeto`
-  MODIFY `id_projeto` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_projeto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para despejos de tabelas

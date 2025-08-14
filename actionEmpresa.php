@@ -8,7 +8,7 @@
             //Verifica o método de requisição do servidor
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 //Bloco para declaração de variáveis
-                $nome_empresa = $area_atuacao = $senhaEmpresa = $confirmarSenhaEmpresa = $cnpj = $endereco = "";
+                $nome_empresa = $area_atuacao = $senhaEmpresa = $confirmarSenhaEmpresa = $cnpj = $localizacao = "";
 
                 //Variável booleana para controle de erros de preenchimento 
                 $erroPreenchimento = false;
@@ -16,15 +16,12 @@
                   //Validação do campo nome_empresa
                 //Utiliza a função empty() para verificar se o campo está vazio
                 if(empty($_POST["cnpj"])){
-                    echo "<div class='alert alert-warning text-center'>O campo <strong>CPF</strong> é obrigatório!</div>";
+                    echo "<div class='alert alert-warning text-center'>O campo <strong>CNPJ</strong> é obrigatório!</div>";
                     $erroPreenchimento = true;
                 }
                 else{
                     //Armazena valor do formulário na variável
                     $cnpj = filtrar_entrada($_POST["cnpj"]);
-                    
-                  
-
                 }
 
                 //Validação do campo nome_empresa
@@ -44,15 +41,15 @@
                     }
 
                 }
-                //Validação do campo endereco
+                //Validação do campo localizacao
                 //Utiliza a função empty() para verificar se o campo está vazio
-                if(empty($_POST["endereco"])){
-                    echo "<div class='alert alert-warning text-center'>O campo <strong>EMAIL</strong> é obrigatório!</div>";
+                if(empty($_POST["localizacao"])){
+                    echo "<div class='alert alert-warning text-center'>O campo <strong>Endereço</strong> é obrigatório!</div>";
                     $erroPreenchimento = true;
                 }
                 else{
                     //Armazena valor do formulário na variável
-                    $endereco = filtrar_entrada($_POST["endereco"]);
+                    $localizacao = filtrar_entrada($_POST["localizacao"]);
                 }
 
                 //Validação do campo area_atuacao
@@ -114,7 +111,7 @@
                                         <td>$nome_empresa</td>
                                     </tr>
                                     <tr>
-                                        <th>ÁREA DE ATUAÇ</th>
+                                        <th>ÁREA DE ATUAÇÃO</th>
                                         <td>$area_atuacao</td>
                                     </tr>
                                     <tr>
@@ -123,7 +120,7 @@
                                     </tr>
                                     <tr>
                                         <th>ENDEREÇO</th>
-                                        <td>$endereco</td>
+                                        <td>$localizacao</td>
                                     </tr>
                                 </table>
                             </div>

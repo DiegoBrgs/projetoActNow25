@@ -1,4 +1,24 @@
 <?php include "header.php" ?>
+  
+
+<!--Header2 Index -->
+<header class="py-5" style="background-color: #004aad">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6"  >
+                <div class="my-5 text-center text-xl-start">
+                    <h1 class="display-5 fw-bolder text-white mb-2">Trabalhe, Ajude, Coopere</h1>
+                    <p class="lead fw-normal text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
+                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
+                        <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
+        </div>
+    </div>
+</header>
 
 <div class='container mt-5 mb-5'>
 
@@ -40,6 +60,24 @@
         $res            = mysqli_query($conn, $listarProjetos); //Recebe true OR false com base na execução
         $totalProjetos  = mysqli_num_rows($res); //Retorna a quantidade de registros encontrados
 
+        
+
+
+        //Texto sobre os projetos
+        echo"<div class='row gx-5 justify-content-center'>
+                <div class='col-lg-8 col-xl-6'>
+                    <div class='text-center'>
+                        <h2 class='fw-bolder'>Projetos</h2>
+                        <p class='lead fw-normal text-muted mb-5'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr>
+        ";        
+
+
+        //Pesquisa e filtro
         if($totalProjetos > 0){
             if($totalProjetos == 1){
                 //Se o total de Projetos for igual a um, exibe mensagem no singular
@@ -72,7 +110,6 @@
 
     ?>
 
-    <hr>
 
     <!-- Exibe a grid com os cards -->
     <div class="row">
@@ -80,7 +117,7 @@
         <?php
             //Loop para armazenar os registros da tabela em variáveis PHP
             while($registro = mysqli_fetch_assoc($res)){
-                $id_projeto           = $registro['id_projeto'];
+                $id_projeto          = $registro['id_projeto'];
                 $nomeProjeto         = $registro['nomeProjeto'];
                 $vagas               = $registro['vagas'];
                 $cargaHoraria        = $registro['carga_horaria'];
@@ -88,45 +125,52 @@
                 $statusProjeto       = $registro['status_projeto'];
                 $cnpj                = $registro['cnpj'];
                 $fotoProjeto         = $registro['fotoProjeto'];
+                //$nome_empresa        = $registro['nome_empresa'];
+                //$area_atuacao        = $registro['area_atuacao'];
+                
 
                 echo "
-                    <div class='col-sm-3'>
+                        <div class='col-sm-3 mb-3'>
+                                <div class='card h-100 shadow border-0'>
 
-                        <div class='card' style='width:100%; height:100%'>
-
-                            <div class='card-body' style='height:100%'>
-                                <a href='visualizarProjeto.php?id_projeto=$id_projeto' style='text-decoration:none' title='Visualizar mais detalhes de $nomeProjeto'>
-                                    <div class='position-relative'> ";
-                                        if($statusProjeto == 'esgotado'){
-                                            echo "
-                                                <div class='position-absolute top-50 start-50 translate-middle bg-danger text-white px-4 py-2 fs-6 fw-bold rounded shadow' style='z-index: 10; opacity: 0.85;'>
-                                                    ESGOTADO
-                                                </div>
-                                            ";
-                                        }
-                                        echo "
-                                            <img class='card-img-top' src='$fotoProjeto' alt='Foto de $nomeProjeto' ";
+                                    <div class='card-body' style='height:100%'>
+                                        <a href='visualizarProjeto.php?id_projeto=$id_projeto' style='text-decoration:none' title='Visualizar mais detalhes de $nomeProjeto'>
+                                            <div class='position-relative'> ";
                                                 if($statusProjeto == 'esgotado'){
-                                                    echo "style='filter:grayscale(100%)' ";
+                                                    echo "
+                                                        <div class='position-absolute top-50 start-50 translate-middle bg-danger text-white px-4 py-2 fs-6 fw-bold rounded shadow' style='z-index: 10; opacity: 0.85;'>
+                                                            ESGOTADO
+                                                        </div>
+                                                    ";
                                                 }
-                                            echo ">
+                                                echo "
+                                                    <img class='card-img-top' src='$fotoProjeto' alt='Foto de $nomeProjeto' ";
+                                                        if($statusProjeto == 'esgotado'){
+                                                            echo "style='filter:grayscale(100%)' ";
+                                                        }
+                                                    echo ">
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
 
-                            <div class='card-body text-center'>
-                                <h4 class='card-title'>$nomeProjeto</h4>
-                                <p class='card-text'>Vagas: <strong>$vagas</strong>
-                                <div class='d-grid' style='border-size:border-box'>
-                                    <a class='btn btn-outline-success' href='visualizarProjeto.php?id_projeto=$id_projeto' style='text-decoration:none' title='Visualizar mais detalhes de $nomeProjeto'>
-                                        <i class='bi bi-eye'></i> Visualizar Projeto
-                                    </a>
+                                    <div class='card-body p-4'>
+                                        <div class='badge bg-primary bg-gradient rounded-pill mb-2'>News</div>
+                                        <a class='text-decoration-none link-dark stretched-link' href='visualizarProjeto.php?id_projeto=$id_projeto'><h5 class='card-title mb-3'>$nomeProjeto</h5></a>
+                                        <p class='card-text mb-0'>$descricao</p>
+                                    </div>
+                                    <div class='card-footer p-4 pt-0 bg-transparent border-top-0'>
+                                        <div class='d-flex align-items-end justify-content-between'>
+                                            <div class='d-flex align-items-center'>
+                                                <img class='rounded-circle me-3' src='$fotoEmpresa' alt='Foto da $nome_empresa' />
+                                                <div class='small'>";
+                                                    /*<div class='fw-bold'>$nome_empresa</div>
+                                                    <div class='text-muted'>$area_atuacao &middot; $vagas</div>*/echo"
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                        </div> 
-
-                    </div>
 
                 ";
             }

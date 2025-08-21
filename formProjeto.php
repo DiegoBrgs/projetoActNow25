@@ -49,7 +49,7 @@
                         <div class="invalid-feedback"></div>
                     </div>
                 
-                    <button type="submit" class="btn btn-success">Cadastrar Projeto</button>
+                    <button type="submit" class="btn btn-success" style="background-color: #004aad">Cadastrar Projeto</button>
                 </form>
             </div>
         </div>

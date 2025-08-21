@@ -8,10 +8,10 @@
             <div class="col-lg-8 col-xl-7 col-xxl-6"  >
                 <div class="my-5 text-center text-xl-start">
                     <h1 class="display-5 fw-bolder text-white mb-2">Trabalhe, Ajude, Coopere</h1>
-                    <p class="lead fw-normal text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
+                    <p class="lead fw-normal text-white-50 mb-4">Comece agora e adquira conhecimento e experiência para seu futuro!</p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
-                        <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Começar Agora!</a>
+                        <a class="btn btn-outline-light btn-lg px-4" href="#!">Saiba Mais</a>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,25 @@
         include "conexaoBD.php";
 
         //Variável PHP que recebe a Query para selecionar todos os campos da tabela Projetos
-        $listarProjetos = "SELECT * FROM Projeto";
+        $listarProjetos = "SELECT 
+            Projeto.id_projeto,
+            Projeto.nomeProjeto,
+            Projeto.vagas,
+            Projeto.carga_horaria,
+            Projeto.descricao,
+            Projeto.status_projeto,
+            Projeto.fotoProjeto,
+            Projeto.Empresa_cnpj,
+            
+            Empresa.nome_empresa,
+            Empresa.area_atuacao,
+            Empresa.fotoEmpresa,
+            Empresa.localizacao
+        FROM 
+            Projeto
+        INNER JOIN 
+            Empresa ON Projeto.Empresa_cnpj = Empresa.cnpj;
+        ";
 
         //Verificar se há algum parâmetro chamado filtroProjeto sendo recebido por GET
         if(isset($_GET['filtroProjeto'])){
@@ -103,7 +121,7 @@
                     <label for='filtroProjeto'>Selecione um Filtro</label>
                     <br>
                 </div>
-                <button type='submit' class='btn btn-outline-success' style='float:right'><i class='bi bi-funnel'></i> Filtrar Projetos</button>
+                <button type='submit' class='btn btn-outline-primary' style='float:right'><i class='bi bi-funnel'></i> Filtrar Projetos</button>
                 <br>
             </form>
         ";
@@ -123,10 +141,11 @@
                 $cargaHoraria        = $registro['carga_horaria'];
                 $descricao           = $registro['descricao'];
                 $statusProjeto       = $registro['status_projeto'];
-                $cnpj                = $registro['cnpj'];
+                $cnpj                = $registro['Empresa_cnpj'];
                 $fotoProjeto         = $registro['fotoProjeto'];
-                //$nome_empresa        = $registro['nome_empresa'];
-                //$area_atuacao        = $registro['area_atuacao'];
+                $nome_empresa        = $registro['nome_empresa'];
+                $area_atuacao        = $registro['area_atuacao'];
+                $fotoEmpresa         = $registro['fotoEmpresa'];
                 
 
                 echo "
@@ -152,19 +171,19 @@
                                             </div>
                                         </a>
                                     </div>
-
+                                        
                                     <div class='card-body p-4'>
-                                        <div class='badge bg-primary bg-gradient rounded-pill mb-2'>News</div>
+                                        <div class='badge bg-primary bg-gradient rounded-pill mb-2'>$statusProjeto</div>
                                         <a class='text-decoration-none link-dark stretched-link' href='visualizarProjeto.php?id_projeto=$id_projeto'><h5 class='card-title mb-3'>$nomeProjeto</h5></a>
                                         <p class='card-text mb-0'>$descricao</p>
                                     </div>
                                     <div class='card-footer p-4 pt-0 bg-transparent border-top-0'>
                                         <div class='d-flex align-items-end justify-content-between'>
                                             <div class='d-flex align-items-center'>
-                                                <img class='rounded-circle me-3' src='$fotoEmpresa' alt='Foto da $nome_empresa' />
-                                                <div class='small'>";
-                                                    /*<div class='fw-bold'>$nome_empresa</div>
-                                                    <div class='text-muted'>$area_atuacao &middot; $vagas</div>*/echo"
+                                                <img class='rounded-circle me-3 img-fluid w-25' src='$fotoEmpresa' alt='Foto da $nome_empresa' />
+                                                <div class='small'>
+                                                    <div class='fw-bold'>$nome_empresa</div>
+                                                    <div class='text-muted'>$area_atuacao <br>Número de Vagas: <b>$vagas</b></div>
                                                 </div>
                                             </div>
                                         </div>

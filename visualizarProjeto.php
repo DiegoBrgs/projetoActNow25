@@ -25,7 +25,7 @@
                         $carga_horaria = $registro['carga_horaria'];
                         $descricao     = $registro['descricao'];
                         $status_projeto    = $registro['status_projeto'];
-                        $cnpj    = $registro['cnpj'];
+                        $Empresa_cnpj    = $registro['Empresa_cnpj'];
                         $fotoProjeto    = $registro['fotoProjeto'];
 
                         ?>

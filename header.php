@@ -34,20 +34,19 @@
     <body>
         
         <!-- Container para abrigar o Logotipo -->
-        <div class="container-fluid text-center p-3">
+        <div class="container-fluid text-center">
             <a href="index.php" title="Retornar para a página inicial">
-                <img src="img/logotipo.png" style="width:150px;">
+                <img src="img/ActNow.png" style="width:220px;">
             </a>
         </div>
 
         <!-- Barra de Navegação do Sistema -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #004aad">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="index.php">Act Now</a>
+                    <a class="navbar-brand" href="index.php"><i class="bi bi-house"></i> Início</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="index.php">Inicio</a></li>
                             <li class="nav-item"><a class="nav-link" href="formLogin.php">Login</a></li>
                             <li class="nav-item"><a class="nav-link" href="formProjeto.php">Cadastrar</a></li>
                             <!-- 

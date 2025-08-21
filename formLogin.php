@@ -19,7 +19,7 @@
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback"></div>
                     </div>
-                    <button type="submit" class="btn btn-success">Login</button>
+                    <button type="submit" class="btn btn-success" style="background-color: #004aad">Login</button>
                    
                 </form>
             </div>
@@ -37,7 +37,7 @@
 
     <p><h3>Para Empresas:</h3></p>
 
-    <a class="btn btn-success" href="formLoginEmpresas.php" >Empresas</a>
+    <a class="btn btn-success" style="background-color: #004aad" href="formLoginEmpresas.php" >Empresas</a>
 
 
     <p> <br>

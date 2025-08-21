@@ -54,7 +54,7 @@
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback"></div>
                     </div>
-                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                    <button type="submit" class="btn btn-success" style="background-color: #004aad">Cadastrar</button>
                 </form>
             </div>
         </div>

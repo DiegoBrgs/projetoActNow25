@@ -1,39 +1,35 @@
-    <?php
+<?php
+session_start();
+include("conexaoBD.php");
 
-    session_start(); //função para inciar uma sessão
-    include("conexaoBD.php");
+// Verifica se os dados foram enviados via POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $emailUsuario = mysqli_real_escape_string($conn, $_POST["emailUsuario"]);
     $senhaUsuario = mysqli_real_escape_string($conn, $_POST["senhaUsuario"]);
 
+    // Consulta segura (ainda com MD5 - se puder mudar, melhor)
+    $sql = "SELECT * FROM usuarios WHERE emailUsuario = '$emailUsuario' AND senhaUsuario = md5('$senhaUsuario')";
+    $resultado = mysqli_query($conn, $sql);
 
-    $buscarLogin ="SELECT *
-                   FROM usuarios
-                    WHERE emailUsuario = '$emailUsuario'
-                    AND senhaUsuario = md5('$senhaUsuario')
-                    ";
+    if ($resultado && mysqli_num_rows($resultado) == 1) {
+        $registro = mysqli_fetch_assoc($resultado);
 
-    
-    $efetuarLogin = mysqli_query($conn, $buscarLogin);
-    
-    if($registro = mysqli_fetch_assoc($efetuarLogin)){
-        $quantidadeLogin = mysqli_num_rows($efetuarLogin);
-  
-        $emaiUsuario = $registro["email"];
-        $nomeUsuario = $registro["nome"];
+        // Cria variáveis de sessão com dados importantes
+        $_SESSION["emailUsuario"] = $registro["emailUsuario"];
+        $_SESSION["nomeUsuario"] = $registro["nome"];
 
-
-        $_SESSION["emaiUsuario"] = $emaiUsuario;
-        $_SESSION["nomeUsuario"] = $nomeUsuario;
-
-        header("location:index.php"); //Funçao que rediereciona para uma determinada pagina
-
-
-        //echo "<h1>Foram encontrados $quantidadeLogin com os dados informados!</h1>";
-
+        // Redireciona para a página inicial (ou perfil)
+        header("Location: index.php");
+        exit();
+    } else {
+        // Login inválido: redireciona com erro
+        header("Location: formLogin.php?erroLogin=dadosInvalidos");
+        exit();
     }
-    else{
-        echo"<h1>Não existe login para os dados informados! </h1>";
-        header("location:FormLogin.php?erroLogin='dadosInvalidos'");
-    }
+} else {
+    // Caso acesse esse arquivo direto via GET, redireciona para login
+    header("Location: formLogin.php");
+    exit();
+}
 ?>

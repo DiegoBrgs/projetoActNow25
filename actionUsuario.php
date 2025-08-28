@@ -22,9 +22,17 @@
                 else{
                     //Armazena valor do formulário na variável
                     $cpfUsuario = filtrar_entrada($_POST["cpfUsuario"]);
-                    
-                  
+                }
 
+                //Validação do campo descUsuario
+                //Utiliza a função empty() para verificar se o campo está vazio
+                if(empty($_POST["descUsuario"])){
+                    echo "<div class='alert alert-warning text-center'>O campo <strong>DESCRIÇÃO</strong> é obrigatório!</div>";
+                    $erroPreenchimento = true;
+                }
+                else{
+                    //Armazena valor do formulário na variável
+                    $descUsuario = filtrar_entrada($_POST["descUsuario"]);
                 }
 
                 //Validação do campo nomeUsuario
@@ -44,6 +52,7 @@
                     }
 
                 }
+
                 //Validação do campo emailUsuario
                 //Utiliza a função empty() para verificar se o campo está vazio
                 if(empty($_POST["emailUsuario"])){

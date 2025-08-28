@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21/08/2025 às 21:45
--- Versão do servidor: 8.0.40
--- Versão do PHP: 8.2.12
+-- Tempo de geração: 28-Ago-2025 às 18:54
+-- Versão do servidor: 8.0.29
+-- versão do PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `avaliacao`
+-- Estrutura da tabela `avaliacao`
 --
 
 CREATE TABLE `avaliacao` (
@@ -38,7 +38,7 @@ CREATE TABLE `avaliacao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `empresa`
+-- Estrutura da tabela `empresa`
 --
 
 CREATE TABLE `empresa` (
@@ -51,7 +51,7 @@ CREATE TABLE `empresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Despejando dados para a tabela `empresa`
+-- Extraindo dados da tabela `empresa`
 --
 
 INSERT INTO `empresa` (`cnpj`, `nome_empresa`, `area_atuacao`, `fotoEmpresa`, `localizacao`, `senhaEmpresa`) VALUES
@@ -60,7 +60,7 @@ INSERT INTO `empresa` (`cnpj`, `nome_empresa`, `area_atuacao`, `fotoEmpresa`, `l
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `projeto`
+-- Estrutura da tabela `projeto`
 --
 
 CREATE TABLE `projeto` (
@@ -70,22 +70,22 @@ CREATE TABLE `projeto` (
   `carga_horaria` varchar(100) NOT NULL,
   `descricao` varchar(200) NOT NULL,
   `status_projeto` varchar(20) NOT NULL,
-  `cnpj` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Empresa_cnpj` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `fotoProjeto` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Despejando dados para a tabela `projeto`
+-- Extraindo dados da tabela `projeto`
 --
 
-INSERT INTO `projeto` (`id_projeto`, `nomeProjeto`, `vagas`, `carga_horaria`, `descricao`, `status_projeto`, `cnpj`, `fotoProjeto`) VALUES
+INSERT INTO `projeto` (`id_projeto`, `nomeProjeto`, `vagas`, `carga_horaria`, `descricao`, `status_projeto`, `Empresa_cnpj`, `fotoProjeto`) VALUES
 (13, 'batman', 1, '30 por dia', 'batman', '', '11.111.111/1111-11', 'img/images (3).jpg'),
 (14, 'coringa', 2, '30 por dia', 'seja o coringa', 'disponivel', '11.111.111/1111-11', 'img/images (2).jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuarios`
+-- Estrutura da tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -98,7 +98,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Despejando dados para a tabela `usuarios`
+-- Extraindo dados da tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`emailUsuario`, `senhaUsuario`, `cpfUsuario`, `nomeUsuario`, `descUsuario`, `fotoUsuario`) VALUES
@@ -109,7 +109,7 @@ INSERT INTO `usuarios` (`emailUsuario`, `senhaUsuario`, `cpfUsuario`, `nomeUsuar
 --
 
 --
--- Índices de tabela `avaliacao`
+-- Índices para tabela `avaliacao`
 --
 ALTER TABLE `avaliacao`
   ADD PRIMARY KEY (`id_avaliacao`),
@@ -117,26 +117,26 @@ ALTER TABLE `avaliacao`
   ADD KEY `cnpj` (`cnpj`);
 
 --
--- Índices de tabela `empresa`
+-- Índices para tabela `empresa`
 --
 ALTER TABLE `empresa`
   ADD PRIMARY KEY (`cnpj`);
 
 --
--- Índices de tabela `projeto`
+-- Índices para tabela `projeto`
 --
 ALTER TABLE `projeto`
   ADD PRIMARY KEY (`id_projeto`),
-  ADD KEY `cnpj` (`cnpj`);
+  ADD KEY `cnpj` (`Empresa_cnpj`);
 
 --
--- Índices de tabela `usuarios`
+-- Índices para tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`cpfUsuario`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
@@ -152,21 +152,21 @@ ALTER TABLE `projeto`
   MODIFY `id_projeto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- Restrições para tabelas despejadas
+-- Restrições para despejos de tabelas
 --
 
 --
--- Restrições para tabelas `avaliacao`
+-- Limitadores para a tabela `avaliacao`
 --
 ALTER TABLE `avaliacao`
   ADD CONSTRAINT `avaliacao_ibfk_1` FOREIGN KEY (`cpf`) REFERENCES `usuarios` (`cpfUsuario`),
   ADD CONSTRAINT `avaliacao_ibfk_2` FOREIGN KEY (`cnpj`) REFERENCES `empresa` (`cnpj`);
 
 --
--- Restrições para tabelas `projeto`
+-- Limitadores para a tabela `projeto`
 --
 ALTER TABLE `projeto`
-  ADD CONSTRAINT `projeto_ibfk_1` FOREIGN KEY (`cnpj`) REFERENCES `empresa` (`cnpj`);
+  ADD CONSTRAINT `projeto_ibfk_1` FOREIGN KEY (`Empresa_cnpj`) REFERENCES `empresa` (`cnpj`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

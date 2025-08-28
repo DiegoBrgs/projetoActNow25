@@ -45,7 +45,7 @@
         FROM 
             Projeto
         INNER JOIN 
-            Empresa ON Projeto.Empresa_cnpj = Empresa.cnpj;
+            Empresa ON Projeto.Empresa_cnpj = Empresa.cnpj
         ";
 
         //Verificar se há algum parâmetro chamado filtroProjeto sendo recebido por GET
@@ -55,7 +55,7 @@
 
             //Se o filtro for diferente de 'todos', concatena a filtragem
             if($filtroProjeto != 'todos'){
-                $listarProjetos = $listarProjetos . " WHERE status_projeto LIKE '$filtroProjeto' ";
+                $listarProjetos = $listarProjetos . " WHERE Projeto.status_projeto LIKE '$filtroProjeto' ";
             }
 
             switch($filtroProjeto){
@@ -86,7 +86,7 @@
                 <div class='col-lg-8 col-xl-6'>
                     <div class='text-center'>
                         <h2 class='fw-bolder'>Projetos</h2>
-                        <p class='lead fw-normal text-muted mb-5'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                        <p class='lead fw-normal text-muted mb-5'>Aqui estão listados todos os projetos cadastrados no sistema</p>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
         }
 
         echo "
-            <form name='formFiltro' action='index.php' method='GET'>
+            <form name='formFiltro' action='index.php#listaProjetos' method='GET'>
                 <div class='form-floating mt-3'>
                     <select class='form-select' name='filtroProjeto' required>
                         <option value='todos'"; if($filtroProjeto == 'todos'){echo "selected";} echo">Exibir todos os Projetos</option>
@@ -130,7 +130,7 @@
 
 
     <!-- Exibe a grid com os cards -->
-    <div class="row">
+    <div id="listaProjetos" class="row">
 
         <?php
             //Loop para armazenar os registros da tabela em variáveis PHP
@@ -146,7 +146,7 @@
                 $nome_empresa        = $registro['nome_empresa'];
                 $area_atuacao        = $registro['area_atuacao'];
                 $fotoEmpresa         = $registro['fotoEmpresa'];
-                
+
 
                 echo "
                         <div class='col-sm-3 mb-3'>
@@ -171,7 +171,7 @@
                                             </div>
                                         </a>
                                     </div>
-                                        
+
                                     <div class='card-body p-4'>
                                         <div class='badge bg-primary bg-gradient rounded-pill mb-2'>$statusProjeto</div>
                                         <a class='text-decoration-none link-dark stretched-link' href='visualizarProjeto.php?id_projeto=$id_projeto'><h5 class='card-title mb-3'>$nomeProjeto</h5></a>

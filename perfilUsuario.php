@@ -41,8 +41,8 @@ $conn->close();
                 <div class="card-body">
 
                     <div class="text-center mb-4">
-                        <?php if (!empty($usuario['fotoUsuario']) && file_exists("img/" . $usuario['fotoUsuario'])): ?>
-                            <img src="/img/<?php echo htmlspecialchars($usuario['fotoUsuario']); ?>" alt="Foto" />
+                        <?php if (!empty($usuario['fotoUsuario'])): ?>
+                            <img style='width:150px' class="img-fluid rounded-circle" src="<?php echo htmlspecialchars($usuario['fotoUsuario']); ?>" alt="Foto" />
                         <?php else: ?>
                             <img src="img/ActNow.png" alt="Foto Padrão" class="rounded-circle" width="150" height="150" />
                         <?php endif; ?>

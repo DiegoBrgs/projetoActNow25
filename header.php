@@ -55,14 +55,42 @@ if (session_status() == PHP_SESSION_NONE) {
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                 <?php if (isset($_SESSION["emailUsuario"])): ?>
+                    <?php 
+                        include "conexaoBD.php";
+
+                        // Verifica se usuário está logado
+                        if (!isset($_SESSION['emailUsuario'])) {
+                            header("Location: formLogin.php");
+                            exit();
+                        }
+
+                        $email = $_SESSION['emailUsuario'];
+
+                        // Busca dados do usuário
+                        $query = "SELECT nomeUsuario, emailUsuario, cpfUsuario, descUsuario, fotoUsuario FROM usuarios WHERE emailUsuario = ?";
+                        $stmt = $conn->prepare($query);
+                        $stmt->bind_param("s", $email);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+
+                        if ($usuario = $result->fetch_assoc()) {
+                            // Dados carregados com sucesso
+                        } else {
+                            echo "<div class='alert alert-danger text-center'>Usuário não encontrado.</div>";
+                            exit();
+                        }
+
+                        $stmt->close();
+                        $conn->close();
+                    ?>
                     <!-- Usuário logado -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfilUsuario.php">
-                            <i class="bi bi-person-circle"></i> Bem Vindo!
-                        </a>
                     <li class="nav-item"><a class="nav-link" href="formLoginEmpresas.php">Empresas</a></li>
                     <li class="nav-item"><a class="nav-link" href="formProjeto.php">Projeto</a></li>
                     <li class="nav-item"><a class="nav-link" href="logout.php">Sair</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfilUsuario.php">
+                            <img class="rounded-circle img-fluid" style='width: 30px ' src="<?php echo htmlspecialchars($usuario['fotoUsuario']); ?>"></img>
+                        </a>
 
 
                 <?php else: ?>

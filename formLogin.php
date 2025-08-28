@@ -1,54 +1,88 @@
 <?php include "header.php" ?>
-<section class="vh-100" style="background-color: #ffffffff;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
-        <div class="card" style="border-radius: 1rem;">
-          <div class="row g-0">
-            <div class="col-md-6 col-lg-5 d-none d-md-block">
-              <img src="img/Absolute-Batman-Cvr-A-Nick-Dragotta-5.jpg"
-                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+
+<style>
+    body {
+        background: #ffffffff;
+    }
+
+    .card-custom {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        overflow: hidden;
+    }
+
+    .card-custom img {
+        object-fit: cover;
+        height: 100%;
+    }
+
+    .form-control {
+        border-radius: 8px;
+    }
+
+    .btn-custom {
+        background-color: #004aad;
+        color: white;
+        font-weight: bold;
+        border-radius: 8px;
+    }
+
+    .btn-custom:hover {
+        background-color: #003580;
+    }
+</style>
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <div class="card card-custom">
+                <div class="row g-0">
+
+                    <!-- Coluna da Imagem -->
+                    <div class="col-md-6 d-none d-md-block">
+                        <img src="img/iconvolu.png" alt="Imagem Login" class="w-100 h-100">
+                    </div>
+
+                    <!-- Coluna do Formulário -->
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="p-4 w-100">
+                            <div class="text-center mb-4">
+                                <img src="img/ActNow.png" style="width: 25%;" alt="Logo">
+                                <h2 class="mt-3" style="color:#004aad;">Login do Usuário</h2>
+                                <p class="text-muted">Faça login em sua conta!</p>
+                            </div>
+
+                            <form action="actionLogin.php" method="POST" class="was-validated">
+
+                                <div class="mb-3">
+                                    <label for="emailUsuario" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="emailUsuario" name="emailUsuario" required>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="senhaUsuario" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" id="senhaUsuario" name="senhaUsuario" required>
+                                </div>
+
+                                <div class="d-grid mb-3">
+                                    <button type="submit" class="btn btn-custom btn-lg">Login</button>
+                                </div>
+
+                                <div class="text-center">
+                                    <a class="small text-muted d-block mb-2" href="#">Esqueceu a senha?</a>
+                                    <p class="mb-1">Não possui uma conta? <a href="formUsuario.php" style="color:#004aad;">Cadastre-se</a></p>
+                                    <p>É uma empresa? <a href="formEmpresa.php" style="color:#004aad;">Criar conta empresarial</a></p>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black">
-
-                <form>
-
-                  <div class="d-flex align-items-center mb-3 pb-1">
-                    <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"> </i>
-                    <span class="h1 fw-bold mb-0"> <img src="img/ActNow.png" style='width:20%'> </span>
-                  </div>
-
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Faça login em sua conta!</h5>
-
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label" for="form2Example17"> Email: </label>
-                    <input type="email" id="form2Example17" class="form-control form-control-lg" />
-                    
-                  </div>
-
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label" for="form2Example27"> Senha: </label>
-                    <input type="password" id="form2Example27" class="form-control form-control-lg" />
-                  </div>
-
-                  <div class="pt-1 mb-4">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" type="button">Login</button>
-                  </div>
-
-                  <a class="small text-muted" href="#!">Esqueceu a senha?</a>
-                  <p class="mb-5 pb-lg-2" style="color: #393f81;"> Não possui uma conta? <a href="#!"
-                      style="color: #393f81;">Register here</a></p>
-                  <a href="#!" class="small text-muted">Terms of use.</a>
-                  <a href="#!" class="small text-muted">Privacy policy</a>
-                </form>
-
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-</section>
-    <?php include "footer.php" ?>
+</div>
+
+<?php include "footer.php" ?>

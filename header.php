@@ -48,7 +48,9 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link" href="formLogin.php">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="formProjeto.php">Cadastrar</a></li>
+                            <li class="nav-item"><a class="nav-link" href="formUsuario.php">Cadastrar </a></li>
+                            <li class="nav-item"><a class="nav-link" href="formLoginEmpresas.php"> Empresas </a></li>
+                            <li class="nav-item"><a class="nav-link" href="formProjeto.php">Projeto </a></li>
                             <!-- 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>

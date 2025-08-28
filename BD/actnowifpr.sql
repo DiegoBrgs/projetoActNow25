@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Ago-2025 às 18:54
+-- Tempo de geração: 28-Ago-2025 às 22:45
 -- Versão do servidor: 8.0.29
 -- versão do PHP: 8.1.6
 
@@ -55,7 +55,7 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`cnpj`, `nome_empresa`, `area_atuacao`, `fotoEmpresa`, `localizacao`, `senhaEmpresa`) VALUES
-('11.111.111/1111-11', 'klabin', 'aa', '', 'aaa', '202cb962ac59075b964b07152d234b70');
+('11.111.111/1111-11', 'klabin', 'Papel e celulose', 'img/klabin.png', 'Ortigueira', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
@@ -79,8 +79,8 @@ CREATE TABLE `projeto` (
 --
 
 INSERT INTO `projeto` (`id_projeto`, `nomeProjeto`, `vagas`, `carga_horaria`, `descricao`, `status_projeto`, `Empresa_cnpj`, `fotoProjeto`) VALUES
-(13, 'batman', 1, '30 por dia', 'batman', '', '11.111.111/1111-11', 'img/images (3).jpg'),
-(14, 'coringa', 2, '30 por dia', 'seja o coringa', 'disponivel', '11.111.111/1111-11', 'img/images (2).jpg');
+(13, 'Operador de motoserra', 1, '30 por dia', 'batman', 'esgotado', '11.111.111/1111-11', 'img/images (3).jpg'),
+(14, 'Operador I', 2, '30 por dia', 'seja o coringa', 'disponivel', '11.111.111/1111-11', 'img/images (2).jpg');
 
 -- --------------------------------------------------------
 
@@ -102,7 +102,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`emailUsuario`, `senhaUsuario`, `cpfUsuario`, `nomeUsuario`, `descUsuario`, `fotoUsuario`) VALUES
-('12@2', 'e4a6222cdb5b34375400904f03d8e6a5', '242.42', 'diego', '', 'img/base.png');
+('12@2', 'e4a6222cdb5b34375400904f03d8e6a5', '242.42', 'diego', '', 'img/base.png'),
+('bart@gmail.com', '202cb962ac59075b964b07152d234b70', '999.999.999-99', 'bart', 'bsrt', 'img/Bart_Simpson_200px.png');
 
 --
 -- Índices para tabelas despejadas

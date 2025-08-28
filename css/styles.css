@@ -10846,3 +10846,8 @@ html {
   background-repeat: no-repeat;
   min-height: 15rem;
 }
+
+.carousel-inner img {
+    height: 100%;
+    object-fit: cover;
+}

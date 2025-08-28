@@ -13,20 +13,45 @@
                 //Inclui o arquivo de conexão com o Banco de Dados
                 include "conexaoBD.php";
 
-                $exibirProjeto = "SELECT * FROM Projeto WHERE id_projeto = $id_projeto";
+
+                $exibirProjeto = "SELECT 
+                    Projeto.id_projeto,
+                    Projeto.nomeProjeto,
+                    Projeto.vagas,
+                    Projeto.carga_horaria,
+                    Projeto.descricao,
+                    Projeto.status_projeto,
+                    Projeto.fotoProjeto,
+                    Projeto.Empresa_cnpj,
+                    
+                    Empresa.nome_empresa,
+                    Empresa.area_atuacao,
+                    Empresa.fotoEmpresa,
+                    Empresa.localizacao
+                FROM 
+                    Projeto
+                INNER JOIN 
+                    Empresa ON Projeto.Empresa_cnpj = Empresa.cnpj
+                WHERE
+                id_projeto = $id_projeto
+                ";
                 $res           = mysqli_query($conn, $exibirProjeto); //Executa a QUERY
                 $totalProjeto = mysqli_num_rows($res); //Retorna a quantidade de registros
 
                 if($totalProjeto > 0){
                     if($registro = mysqli_fetch_assoc($res)){
-                        $id_projeto        = $registro['id_projeto'];
-                        $nomeProjeto      = $registro['nomeProjeto'];
-                        $vagas      = $registro['vagas'];
-                        $carga_horaria = $registro['carga_horaria'];
-                        $descricao     = $registro['descricao'];
-                        $status_projeto    = $registro['status_projeto'];
-                        $Empresa_cnpj    = $registro['Empresa_cnpj'];
+                        $id_projeto     = $registro['id_projeto'];
+                        $nomeProjeto    = $registro['nomeProjeto'];
+                        $vagas          = $registro['vagas'];
+                        $carga_horaria  = $registro['carga_horaria'];
+                        $descricao      = $registro['descricao'];
+                        $status_projeto = $registro['status_projeto'];
+                        $Empresa_cnpj   = $registro['Empresa_cnpj'];
                         $fotoProjeto    = $registro['fotoProjeto'];
+
+                        $nome_empresa   = $registro['nome_empresa'];
+                        $area_atuacao   = $registro['area_atuacao'];
+                        $fotoEmpresa    = $registro['fotoEmpresa'];
 
                         ?>
 
@@ -73,23 +98,34 @@
                                 </div>
 
                                 <!-- Coluna das informações -->
-                                <div class="col-md-6 bg-light p-3 d-flex flex-column justify-content-center shadow-sm">
-                                    <h5 class="card-title"><b><?php echo $nomeProjeto ?></b></h5>
-                                    <p class="card-text mb-9">Vagas: <b><?php echo $vagas ?></b></p>
-
-                                        
-                                    <div class='align-items-center'>
-                                            <img class='rounded-circle me-3 img-fluid w-35' src='$fotoEmpresa' alt='Foto da $nome_empresa' />
-                                                
+                                 
+                                <div class="col-md-6  p-3 d-flex flex-column justify-content-around shadow-sm">
+                                    <div class>
+                                        <?php
+                                            echo"   
+                                            <div class='d-flex  align-items-center '>
+                                                    <img class='rounded-circle me-5 img-fluid w-25' src='$fotoEmpresa' alt='Foto da $nome_empresa' />
+                                                <div class='small'>
+                                                    <div class='fw-bold'>$nome_empresa</div>
+                                                    <div class='text-muted'>$area_atuacao <br></div>
+                                                </div>
+                                            </div><hr>
+                                            ";
+                                        ?>
                                     </div>
-                                    <div class='small'>
-                                                <div class='fw-bold'>$nome_empresa</div>
-                                                <div class='text-muted'>$area_atuacao <br>Número de Vagas: <b>$vagas</b></div>
-                                            </div>
-                                    <br><br><br><br>
-                                    
+                                    <div class="align-items-start">
 
+                                        <h5 class="card-title"><b><?php echo $nomeProjeto ?></b></h5>
+                                        <p class="card-text mb-9">Vagas: <b><?php echo $vagas ?></b></p>
+                                        <p class='small'><b><?php echo $descricao ?></b></p>
+                                    </div><br><br><br><br><br><br><br><br><br>
+                                    
+                                
                                     <?php
+
+
+
+                                    echo"<hr><div class='align-items-end'>";
                                     if ($status_projeto != 'esgotado') {
                                         echo "
                                             <a href='#' title='Ingressar' class='mb-2'>
@@ -107,7 +143,8 @@
                                         ";
                                     }
 
-                                    echo "<hr><p class='small'><b>$descricao</b></p>";
+                                    echo"</div>";
+                                   
                                     ?>
                                 </div>
                             </div>

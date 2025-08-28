@@ -27,7 +27,7 @@
         //Inclui o arquivo de conexão com o Banco de Dados
         include "conexaoBD.php";
 
-        //Variável PHP que recebe a Query para selecionar todos os campos da tabela Projetos
+        //Variável PHP que recebe a Query para selecionar todos os campos da tabela Projetos e Empresa
         $listarProjetos = "SELECT 
             Projeto.id_projeto,
             Projeto.nomeProjeto,

@@ -10851,3 +10851,8 @@ html {
     height: 100%;
     object-fit: cover;
 }
+.img-empresa-visualizar {
+  width: 40px; /* ajuste conforme quiser */
+  height: 40px; /* para manter o formato circular */
+  object-fit: cover;
+}

@@ -76,7 +76,7 @@
                                                     ";
                                                 }
                                                 echo "
-                                                        <img class='d-block w-100 project-img' src='$fotoProjeto' alt='Foto de $nomeProjeto'";
+                                                        <img class='card-img-top w-100' style='height: 600px; object-fit: cover;' src='$fotoProjeto' alt='Foto de $nomeProjeto'";
                                                 if ($status_projeto == 'esgotado') {
                                                     echo " style='filter: grayscale(100%)'";
                                                 }

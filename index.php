@@ -150,12 +150,12 @@
 
                 echo "
                         <div class='col-sm-3 mb-3'>
-                                <div class='card h-100 shadow border-0'>
+                                <div class='card h-100 shadow bg-white rounded'>
 
                                     <div class='card-body' style='height:100%'>
                                         <a href='visualizarProjeto.php?id_projeto=$id_projeto' style='text-decoration:none' title='Visualizar mais detalhes de $nomeProjeto'>
                                             <div class='position-relative'> ";
-                                                if($statusProjeto == 'esgotado'){
+                                                if($statusProjeto == 'Esgotado'){
                                                     echo "
                                                         <div class='position-absolute top-50 start-50 translate-middle bg-danger text-white px-4 py-2 fs-6 fw-bold rounded shadow' style='z-index: 10; opacity: 0.85;'>
                                                             ESGOTADO
@@ -164,7 +164,7 @@
                                                 }
                                                 echo "
                                                     <img class='card-img-top w-100' style='height: 350px; object-fit: cover;' src='$fotoProjeto' alt='Foto de $nomeProjeto' ";
-                                                        if($statusProjeto == 'esgotado'){
+                                                        if($statusProjeto == 'Esgotado'){
                                                             echo "style='filter: grayscale(100%)' ";
                                                         }
                                                     echo ">
@@ -175,7 +175,7 @@
                                     <div class='card-body p-4'>
                                         <div class='badge bg-primary bg-gradient rounded-pill mb-2'>$statusProjeto</div>
                                         <a class='text-decoration-none link-dark stretched-link' href='visualizarProjeto.php?id_projeto=$id_projeto'><h5 class='card-title mb-3'>$nomeProjeto</h5></a>
-                                        <p class='card-text mb-0'>$descricao</p>
+                                        <p class='card-text text-truncate mb-0'>$descricao</p>
                                     </div>
                                     <div class='card-footer p-4 pt-0 bg-transparent border-top-0'>
                                         <div class='d-flex align-items-end justify-content-between'>

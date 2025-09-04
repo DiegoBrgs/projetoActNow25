@@ -4,11 +4,12 @@
     <div class="container mt-3 mb-3">
 
         <?php
+            
 
             //Verifica o método de requisição do servidor
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 //Bloco para declaração de variáveis
-                $nome_empresa = $area_atuacao = $senhaEmpresa = $confirmarSenhaEmpresa = $cnpj = $localizacao = "";
+                $fotoEmpresa = $nome_empresa = $area_atuacao = $senhaEmpresa = $confirmarSenhaEmpresa = $cnpj = $localizacao = "";
 
                 //Variável booleana para controle de erros de preenchimento 
                 $erroPreenchimento = false;
@@ -89,12 +90,45 @@
                         $erroPreenchimento = true;
                     }
                 }
+                //Início da validação da foto do produto
+                $diretorio    = "img/"; //Define para qual diretório as imagens serão movidas
+                $fotoEmpresa  = $diretorio . basename($_FILES['fotoEmpresa']['name']); //img/joaozinho.jpg
+                $tipoDaImagem = strtolower(pathinfo($fotoEmpresa, PATHINFO_EXTENSION)); //Pega o tipo do arquivo em letras minúsculas
+                $erroUpload   = false; //Variável para controle do upload da foto
+
+                //Verifica se o tamanho do arquivo é DIFERENTE DE ZERO
+                if($_FILES['fotoEmpresa']['size'] != 0){
+
+                    //Verifica se o tamanho do arquivo é maior do que 5 MegaBytes (MB) - Medida em Bytes
+                    if($_FILES['fotoEmpresa']['size'] > 5000000){
+                        echo "<div class='alert alert-warning text-center'>A <strong>FOTO</strong> deve ter tamanho máximo de 5MB!</div>";
+                        $erroUpload = true;
+                    }
+
+                    //Verifica se a foto está nos formatos JPG, JPEG, PNG ou WEBP
+                    if($tipoDaImagem != "jpg" && $tipoDaImagem != "jpeg" && $tipoDaImagem != "png" && $tipoDaImagem != "webp"){
+                        echo "<div class='alert alert-warning text-center'>A <strong>FOTO</strong> deve estar nos formatos JPG, JPEG, PNG ou WEBP</div>";
+                        $erroUpload = true;
+                    }
+
+                    //Verifica se a imagem foi movida para o diretório IMG, utilizando a função move_uploaded_file
+                    if(!move_uploaded_file($_FILES['fotoEmpresa']['tmp_name'], $fotoEmpresa)){
+                        echo "<div class='alert alert-danger text-center'>Erro ao tentar mover a <strong>FOTO</strong> para o diretório $diretorio!</div>";
+                        $erroUpload = true;
+                    }
+
+                }
+                else{
+                    echo "<div class='alert alert-warning text-center'>O campo <strong>FOTO</strong> é obrigatório!</div>";
+                    $erroUpload = true;
+                }
+
 
                 //Se não houver erro de preenchimento, exibe alerta de sucesso e uma tabela com os dados informados
-                if(!$erroPreenchimento){
+                if(!$erroPreenchimento && !$erroUpload){
 
                     //Cria uma variável para armazenar a QUERY para realizar a inserção dos dados do Usuário na tabela Usuarios
-                    $inserirEmpresa = "INSERT INTO Empresa (nome_empresa, localizacao, senhaEmpresa, cnpj, area_atuacao) VALUES ('$nome_empresa', '$localizacao', '$senhaEmpresa', '$cnpj', '$area_atuacao')";
+                    $inserirEmpresa = "INSERT INTO Empresa (fotoEmpresa, nome_empresa, localizacao, senhaEmpresa, cnpj, area_atuacao) VALUES ('$fotoEmpresa', '$nome_empresa', '$localizacao', '$senhaEmpresa', '$cnpj', '$area_atuacao')";
 
                     //Inclui o arquivo de conexão com o Banco de Dados
                     include("conexaoBD.php");
@@ -105,6 +139,9 @@
                         echo "<div class='alert alert-success text-center'><strong>Empresa</strong> cadastrado(a) com sucesso!</div>";
                         echo "
                             <div class='container mt-3'>
+                                <div class='container mt-3 text-center'>
+                                    <img src='$fotoEmpresa' style='width:150px;' title='Foto de $nome_empresa'>
+                                </div>
                                 <table class='table'>
                                     <tr>
                                         <th>NOME DA EMPRESA</th>

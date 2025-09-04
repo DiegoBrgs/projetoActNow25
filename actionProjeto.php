@@ -102,7 +102,7 @@
                 if(!$erroPreenchimento && !$erroUpload){
 
                     //Cria uma variável para armazenar a QUERY para realizar a inserção dos dados do produto na tabela Projetos
-                    $inserirProjeto = "INSERT INTO Projeto (fotoProjeto, nomeProjeto, descricao, carga_horaria, status_projeto, vagas, cnpj) VALUES ('$fotoProjeto', '$nomeProjeto', '$descricao', '$carga_horaria', 'Disponivel', '$vagas', '$cnpj')";
+                    $inserirProjeto = "INSERT INTO Projeto (fotoProjeto, nomeProjeto, descricao, carga_horaria, status_projeto, vagas, Empresa_cnpj) VALUES ('$fotoProjeto', '$nomeProjeto', '$descricao', '$carga_horaria', 'Disponivel', '$vagas', '$cnpj')";
 
                     //Inclui o arquivo de conexão com o Banco de Dados
                     include("conexaoBD.php");

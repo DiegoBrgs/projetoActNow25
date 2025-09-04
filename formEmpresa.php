@@ -44,6 +44,12 @@
 <div class="card card-custom">
     <h2 class="text-center">Cadastro de Empresa:</h2>
     <form action="actionEmpresa.php?pagina=formEmpresa" method="POST" class="was-validated" enctype="multipart/form-data">
+        <div class="form-floating mb-3 mt-3">
+            <input type="file" class="form-control" id="fotoEmpresa" name="fotoEmpresa" required>
+            <label for="fotoEmpresa">Foto</label>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Por favor, insira a foto da empresa</div>
+        </div>
 
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="nome_empresa" placeholder="Nome" name="nome_empresa" required>

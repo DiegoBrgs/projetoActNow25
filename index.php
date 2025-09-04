@@ -10,8 +10,8 @@
                     <h1 class="display-5 fw-bolder text-white mb-2">Trabalhe, Ajude, Coopere</h1>
                     <p class="lead fw-normal text-white-50 mb-4">Comece agora e adquira conhecimento e experiência para seu futuro!</p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Começar Agora!</a>
-                        <a class="btn btn-outline-light btn-lg px-4" href="#!">Saiba Mais</a>
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#listaProjetos">Começar Agora!</a>
+                        <a class="btn btn-outline-light btn-lg px-4" href="sobreNois.php">Sobre Nós</a>
                     </div>
                 </div>
             </div>
@@ -163,9 +163,9 @@
                                                     ";
                                                 }
                                                 echo "
-                                                    <img class='card-img-top' src='$fotoProjeto' alt='Foto de $nomeProjeto' ";
+                                                    <img class='card-img-top w-100' style='height: 350px; object-fit: cover;' src='$fotoProjeto' alt='Foto de $nomeProjeto' ";
                                                         if($statusProjeto == 'esgotado'){
-                                                            echo "style='filter:grayscale(100%)' ";
+                                                            echo "style='filter: grayscale(100%)' ";
                                                         }
                                                     echo ">
                                             </div>

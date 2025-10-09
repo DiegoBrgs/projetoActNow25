@@ -1,110 +1,76 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 09/10/2025 às 19:04
--- Versão do servidor: 8.0.40
--- Versão do PHP: 8.2.12
+<?php  include "header.php"  ?>
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+    <div class="container text-center">
+
+        <?php
+            //Verifica se há algum parÂmetro sendo recebido por método GET
+            if(isset($_GET["idProduto"])){
+                $idProduto = $_GET["idProduto"]; //Armazena o parâmetro em uma váriavel PHP
+
+                include "conexaoBD.php"; //Inclui a conexão com o Banco de Dados
+                $buscarProduto  = "SELECT * FROM Produtos WHERE idProduto = $idProduto"; //Seleciona os dados do Produto
+                $res            = mysqli_query($conn, $buscarProduto); //Executa o comando SQL
+                $totalProdutos  = mysqli_num_rows($res); //Retorna a quantidade de registros encontrados na QUERY executada
+
+                if($totalProdutos > 0){
+                    //Se houverem dados na linha da tabela, atribui o valor atual do array para uma variável
+                    if($registro = mysqli_fetch_assoc($res)){
+                        $idProduto          = $registro["idProduto"];
+                        $fotoProduto        = $registro["fotoProduto"];
+                        $nomeProduto        = $registro["nomeProduto"];
+                        $descricaoProduto   = $registro["descricaoProduto"];
+                        $valorProduto       = $registro["valorProduto"];
+
+                        echo"
+                        <h2>Editar Produto:</h2>
+                        <div class='d-flex justify-content-center mb-3'>
+                            <div class='row'>
+                                <div class='col-12'>
+                                    <form action='#actionEditarProduto.php' method='POST' class='was-validated' enctype='multipart/form-data'>
+                                        <div class='form-floating mb-3 mt-3'>
+                                            <input type='file' class='form-control' id='fotoProduto' name='fotoProduto' required>
+                                            <label for='fotoProduto'>Foto</label>
+                                            <div class='valid-feedback'></div>
+                                            <div class='invalid-feedback'></div>
+                                        </div>
+                                        <div class='form-floating mb-3 mt-3'>
+                                            <input type='text' class='form-control' id='nomeProduto' placeholder='Nome' name='nomeProduto' required>
+                                            <label for='nomeProduto'>Nome do Produto</label>
+                                            <div class='valid-feedback'></div>
+                                            <div class='invalid-feedback'></div>
+                                        </div>
+                                        <div class='form-floating mb-3 mt-3'>
+                                            <textarea class='form-control' id='descricaoProduto' placeholder='Informe uma breve descrição sobre o Produto' name='descricaoProduto' required></textarea>
+                                            <label for='descricaoProduto'>Descrição do Produto</label>
+                                            <div class='valid-feedback'></div>
+                                            <div class='invalid-feedback'></div>
+                                        </div>
+                                        <div class='form-floating mt-3 mb-3'>
+                                            <input type='text' class='form-control' id='valorProduto' placeholder='Valor do Produto' name='valorProduto' required>
+                                            <label for='valorProduto'>Valor do Produto (R$):</label>
+                                            <div class='valid-feedback'></div>
+                                            <div class='invalid-feedback'></div>
+                                        </div>
+                                        <button type='submit' class='btn btn-success'>Cadastrar Produto</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        ";
+                    }
+                }
+                else{ //Se não encontrar produtos com base no ID
+                    echo "<div class='alert alert-warning text-center'>Nâo foi possível encontrar os dados do produto!</div>";
+                }
+                
+            }
+            else{ //Se não receber idProduto via GET
+                echo "<div class='alert alert-warning text-center'>Não foi possível carregar os dados do produto!</div>";
+            }
+        ?>
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+    </div>
 
---
--- Banco de dados: `inf3`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `produtos`
---
-
-CREATE TABLE `produtos` (
-  `idProduto` int NOT NULL,
-  `fotoProduto` varchar(100) NOT NULL,
-  `nomeProduto` varchar(30) NOT NULL,
-  `descricaoProduto` varchar(200) NOT NULL,
-  `valorProduto` decimal(10,2) NOT NULL,
-  `statusProduto` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Despejando dados para a tabela `produtos`
---
-
-INSERT INTO `produtos` (`idProduto`, `fotoProduto`, `nomeProduto`, `descricaoProduto`, `valorProduto`, `statusProduto`) VALUES
-(1, 'img/xbox360.webp', 'XBox 360', 'Console Xbox 360 modelo Slim bloqueado. Acompanha um controle original.', 600.00, 'disponivel'),
-(2, 'img/Fusca_Azul.jpeg', 'Fusca Azul', 'Volkswagen Fusca na cor Azul Metálico, ano 1973, interna em branco gelo, placa preta.', 20000.00, 'esgotado'),
-(3, 'img/tenisVans.jpg', 'Tênis Vans', 'Calçado Tênis Vans Preto, número 37, novo, na caixa.', 500.00, 'disponivel');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `usuarios`
---
-
-CREATE TABLE `usuarios` (
-  `idUsuario` int NOT NULL,
-  `fotoUsuario` varchar(100) NOT NULL,
-  `nomeUsuario` varchar(50) NOT NULL,
-  `dataNascimentoUsuario` date NOT NULL,
-  `cidadeUsuario` varchar(30) NOT NULL,
-  `telefoneUsuario` varchar(20) NOT NULL,
-  `emailUsuario` varchar(50) NOT NULL,
-  `senhaUsuario` varchar(100) NOT NULL,
-  `tipoUsuario` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Despejando dados para a tabela `usuarios`
---
-
-INSERT INTO `usuarios` (`idUsuario`, `fotoUsuario`, `nomeUsuario`, `dataNascimentoUsuario`, `cidadeUsuario`, `telefoneUsuario`, `emailUsuario`, `senhaUsuario`, `tipoUsuario`) VALUES
-(1, 'img/Classico_2D.webp', 'Sonic da Silva', '1991-04-10', 'telemacoBorba', '(42) 99999-9999', 'sonic@gmail.com', '202cb962ac59075b964b07152d234b70', 'administrador'),
-(2, 'img/mario.png', 'Mario Mario', '1983-12-10', 'imbau', '(42) 99999-7777', 'mario@gmail.com', '202cb962ac59075b964b07152d234b70', 'cliente'),
-(3, 'img/Luigi.png', 'Luigi Mario', '1986-03-20', 'telemacoBorba', '(42) 99988-7799', 'luigi@gmail.com', '202cb962ac59075b964b07152d234b70', 'cliente');
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices de tabela `produtos`
---
-ALTER TABLE `produtos`
-  ADD PRIMARY KEY (`idProduto`);
-
---
--- Índices de tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`idUsuario`);
-
---
--- AUTO_INCREMENT para tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `produtos`
---
-ALTER TABLE `produtos`
-  MODIFY `idProduto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+<?php include "footer.php" ?>
